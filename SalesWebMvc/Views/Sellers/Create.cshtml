@@ -1,0 +1,35 @@
+﻿@model SalesWebMvc.Models.Seller
+    <!--Declarando que a viu tem um objeto a disosição dela do tipo seller-->
+    @{
+        ViewData["Title"] = "Create";
+    }
+
+    <h2>@ViewData["Title"]</h2>
+
+    <h4>Seller</h4>
+    <hr /> <!--Quebrando linha -->
+    <div class="row"><!-- Div para manipular o html, e row para garantir que a linha vai ocupar a largura da tela -->
+        <div class="col-md-4"> <!-- para o formulário ocupar 1/3 da tela, o bootstrap divide a tela em 12 partes-->
+            <form asp-action="Create"><!-- Formulário, ação create, método POST-->
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label><!-- definindo o label que vai aparecer na caixinha para digitação-->
+                    <input asp-for="Name" class="form-control"/> 
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <input asp-for="BirthDate" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BaseSalary" class="control-label"></label>
+                    <input asp-for="BaseSalary" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
