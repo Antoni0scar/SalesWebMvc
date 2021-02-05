@@ -14,7 +14,7 @@ namespace SalesWebMvc.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Display(Name = "Birth Date")] //customizando o que vai ser apresentado no display.
+        [Display(Name = "Birth Date")] //customizando o que vai ser apresentado no display, os valores da data.
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
