@@ -1,0 +1,76 @@
+﻿@model SalesWebMvc.Models.Seller
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Seller</h4><!--Subtítulo -->
+    <hr />
+    <dl class="dl-horizontal">
+        <!--Listar os campos do nosso objeto. -->
+        <dt>
+            <!--Elemto DT serve para mostrar o nome do campo -->
+
+            @Html.DisplayNameFor(model => model.Name)
+
+        </dt>
+        <dd>
+            <!--Elemto DD serve para mostrar o valor do campo -->
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            <!--Elemto DT serve para mostrar o nome do campo -->
+
+            @Html.DisplayNameFor(model => model.Email)
+
+        </dt>
+        <dd>
+            <!--Elemto DD serve para mostrar o valor do campo -->
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            <!--Elemto DT serve para mostrar o nome do campo -->
+
+            @Html.DisplayNameFor(model => model.BirthDate)
+
+        </dt>
+        <dd>
+            <!--Elemto DD serve para mostrar o valor do campo -->
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt>
+            <!--Elemto DT serve para mostrar o nome do campo -->
+
+            @Html.DisplayNameFor(model => model.BaseSalary)
+
+        </dt>
+        <dd>
+            <!--Elemto DD serve para mostrar o valor do campo -->
+            @Html.DisplayFor(model => model.BaseSalary)
+        </dd>
+        </dd>
+        <dt>
+            <!--Elemto DT serve para mostrar o nome do campo -->
+
+            @Html.DisplayNameFor(model => model.Department)
+
+        </dt>
+        <dd>
+            <!--Elemto DD serve para mostrar o valor do campo -->
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+
+    </dl>
+
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">Edit</a>
+<hr/>
+    <a asp-action="Index" asp-route-id="@Model.Id" class="btn btn-success">Back to list</a>
+</div>
+
