@@ -38,6 +38,12 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]//ataque csfr, impedindo que sejam enviados dados maliciosos através da autenticação
         public IActionResult Create(Seller seller)
         {
+            if (!ModelState.IsValid) //verificando se o modelo foi validado.
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel); //retornando a mesma view create e validando o objeto.
+            }
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -106,6 +112,12 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
+            if (!ModelState.IsValid) //verificando se o modelo foi validado.
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel); //retornando a mesma view create e validando o objeto.
+            }
             if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });

@@ -9,20 +9,40 @@ namespace SalesWebMvc.Models
     public class Seller
     {
         public int Id { get; set; }
+
+
+
+        [Required(ErrorMessage ="{0} required")] //o nome é obrigatório
+        [StringLength(60,MinimumLength = 3, ErrorMessage = "{0} size should be between {2} and {1}")] //o nome pode ser no maximo 60 e no mínimo 3
         public string Name { get; set; }
 
+
+        [EmailAddress(ErrorMessage ="Enter a valid email")]
+        [Required(ErrorMessage = "{0} required")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+
+
+        [Required(ErrorMessage = "{0} required")]
         [Display(Name = "Birth Date")] //customizando o que vai ser apresentado no display, os valores da data.
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
 
+
+
+        [Required(ErrorMessage = "{0} required")]
+        [Range(100.0,50000.0, ErrorMessage ="{0} must be from {1} to {2}")] //range do salário pode ser de 100 a 50.000
         [Display(Name = "Base Salary")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double BaseSalary { get; set; }
+
+
+
         public Department Department { get; set; }
+
+        [Display(Name = "Department ID")]
         public int DepartmentId { get; set; } //avisando pro entity framework que o ID vai ter que existir
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 
