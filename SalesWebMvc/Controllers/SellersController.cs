@@ -16,7 +16,7 @@ namespace SalesWebMvc.Controllers
         private readonly SellerService _sellerService;
         private readonly DepartmentService _departmentService;
 
-        public SellersController(SellerService sellerService, DepartmentService departmentService)
+        public SellersController(SellerService sellerService, DepartmentService departmentService) //injetando a dependência
         {
             _sellerService = sellerService;
             _departmentService = departmentService;
@@ -34,7 +34,7 @@ namespace SalesWebMvc.Controllers
             return View(viewModel);
         }
 
-        [HttpPost] //anotation, dizendo que é uma ação de POST. "GET"
+        [HttpPost] //anotation, dizendo que é uma ação de POST. "Envia"/Set
         [ValidateAntiForgeryToken]//ataque csfr, impedindo que sejam enviados dados maliciosos através da autenticação
         public async Task<IActionResult> Create(Seller seller)
         {

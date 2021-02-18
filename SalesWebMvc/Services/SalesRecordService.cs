@@ -10,11 +10,11 @@ namespace SalesWebMvc.Services
 {
     public class SalesRecordService
     {
-        private readonly SalesWebMvcContext _context;
+        private readonly SalesWebMvcContext _context; //dependência para o context, do entity framework.
 
         public SalesRecordService(SalesWebMvcContext context)
         {
-            _context = context;
+            _context = context; //fazendo a injeção de dependência
         }
 
         public async Task<List<SalesRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
@@ -27,13 +27,13 @@ namespace SalesWebMvc.Services
 
             if (maxDate.HasValue)
             {
-                result = result.Where(x => x.Date >= maxDate.Value);
+                result = result.Where(x => x.Date <= maxDate.Value);
             }
 
             return await result
                 .Include(x => x.Seller)
                 .Include(x => x.Seller.Department)
-                .OrderByDescending(x => x.Date)
+                .OrderBy(x => x.Date)
                 .ToListAsync();
         }
 
@@ -47,14 +47,14 @@ namespace SalesWebMvc.Services
 
             if (maxDate.HasValue)
             {
-                result = result.Where(x => x.Date >= maxDate.Value);
+                result = result.Where(x => x.Date <= maxDate.Value);
             }
 
             return await result
                 .Include(x => x.Seller)
                 .Include(x => x.Seller.Department)
-                .OrderByDescending(x => x.Date)
-                .GroupBy(x => x.Seller.Department)
+                .OrderBy(x => x.Date)
+                .GroupBy(x => x.Seller.Department) //quando realizamos um agrupamento, o tipo do retorno deve ser igrouping
                 .ToListAsync();
         }
     }

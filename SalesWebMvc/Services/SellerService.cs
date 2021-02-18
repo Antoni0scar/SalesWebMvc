@@ -6,17 +6,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Services.Exceptions;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace SalesWebMvc.Services
 {
     public class SellerService
     {
-        private readonly SalesWebMvcContext _context;
+        private readonly SalesWebMvcContext _context; //dependência para o dbcontext/banco de dados.
 
         public SellerService(SalesWebMvcContext context)
         {
-            _context = context;
+            _context = context; 
         }
 
         public async Task<List<Seller>> FindAllAsync()
@@ -32,7 +32,7 @@ namespace SalesWebMvc.Services
 
         public async Task<Seller> FindByIdAsync(int id)
         {
-             return await _context.Seller.Include(obj => obj.Department).FirstOrDefaultAsync(obj => obj.Id == id);
+             return await _context.Seller.Include(obj => obj.Department).FirstOrDefaultAsync(obj => obj.Id == id); //fazendo o join entre as tabelas com o include.
         }
 
         public async Task RemoveAsync(int id)
@@ -45,7 +45,7 @@ namespace SalesWebMvc.Services
             }
             catch(DbUpdateException e) //capturando a exceção gerada pelo DB
             {
-                throw new IntegrityException("Can't delete seller because he/she has sales"); //lançando a nossa exceção de integridade
+                throw new IntegrityException("Can't delete seller because he/she has sales" + e); //lançando a nossa exceção de integridade
             }
         }
 

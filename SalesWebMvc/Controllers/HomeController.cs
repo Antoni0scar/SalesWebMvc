@@ -16,7 +16,8 @@ namespace SalesWebMvc.Controllers {
             ViewData["Message"] = "Salles Web MVC App in C#.";
             ViewData["Autor"] = "Antonio Oscar";
 
-            return View();
+            return View(); //method builder, retorna o objeto IActionResult (ViewResult), no caso uma view. O Framework vai buscar a view com a mesma nomenclatura do método.
+                           // Métodos que auxilian o objeto de resposta.
         }
 
         public IActionResult Contact() {

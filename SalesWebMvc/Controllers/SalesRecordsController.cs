@@ -24,13 +24,13 @@ namespace SalesWebMvc.Controllers
         {
             if (!minDate.HasValue)
             {
-                minDate = new DateTime(DateTime.Now.Year, 1, 1);
+                minDate = new DateTime(2018, 1, 1);
 
             }
             if (!maxDate.HasValue)
             {
 
-                maxDate = DateTime.Now;
+                maxDate = new DateTime(2018, 12, 31);
             }
 
             ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");
@@ -42,13 +42,13 @@ namespace SalesWebMvc.Controllers
         {
             if (!minDate.HasValue)
             {
-                minDate = new DateTime(DateTime.Now.Year, 1, 1);
+                minDate = new DateTime(2018, 1, 1);
 
             }
             if (!maxDate.HasValue)
             {
 
-                maxDate = DateTime.Now;
+                maxDate = new DateTime(2018, 12, 31);
             }
 
             ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");

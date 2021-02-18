@@ -12,9 +12,9 @@ namespace SalesWebMvc.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private readonly SalesWebMvcContext _context; //depêndencia classe do entity framework
+        private readonly SalesWebMvcContext _context; //depêndencia classe do entity framework, responsável por "acessar os dados".
 
-        public DepartmentsController(SalesWebMvcContext context)
+        public DepartmentsController(SalesWebMvcContext context) //injeção de dependência. 
         {
             _context = context;
         }

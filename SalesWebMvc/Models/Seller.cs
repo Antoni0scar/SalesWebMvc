@@ -42,6 +42,8 @@ namespace SalesWebMvc.Models
 
         public Department Department { get; set; }
 
+
+
         [Display(Name = "Department ID")]
         public int DepartmentId { get; set; } //avisando pro entity framework que o ID vai ter que existir
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();

@@ -1,21 +1,16 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using SalesWebMvc.Data;
 using SalesWebMvc.Services;
-
-
+using SalesWebMvc.Models;
 
 namespace SalesWebMvc
 {
@@ -29,6 +24,7 @@ namespace SalesWebMvc
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // Configura os servicos da aplicação
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -41,19 +37,23 @@ namespace SalesWebMvc
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<SalesWebMvcContext>(options =>
-                    options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), builder =>
-                        builder.MigrationsAssembly("SalesWebMvc")));
+            //adicionando o dbcontext no mecanismo de injeção de dependência do aplicativo
+            services.AddDbContext<SalesWebMvcContext>(
+                options => options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), 
+                builder => builder.MigrationsAssembly("SalesWebMvc"))
+                );
 
             services.AddScoped<SeedingService>(); //Incluindo o seeding service para ser passado por injeção de dependência
-            services.AddScoped<SellerService>(); //Incluindo o seller service para ser passado por injeção de dependência
+            services.AddScoped<SellerService>(); //Incluindo o seller service para ser passado por injeção de dependência / O serviço agora pode ser injetado em outras classes.
             services.AddScoped<DepartmentService>(); //Incluindo o department service para ser passado por injeção de dependência
             services.AddScoped<SalesRecordService>();//Incluindo o sales record service para ser passado por injeção de dependência
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline. 
+        // Método para configurar as requisições
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
+            //Definindo configurações de localização
             var enUS = new CultureInfo("en-US");
             var localizationOptions = new RequestLocalizationOptions
             {
@@ -67,7 +67,7 @@ namespace SalesWebMvc
             if (env.IsDevelopment()) //se está no perfil de desenvolvimento
             {
                 app.UseDeveloperExceptionPage();
-                seedingService.Seed();
+                seedingService.Seed(); //populando a base de dados
             }
             else
             {
@@ -84,7 +84,7 @@ namespace SalesWebMvc
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}"); //chamando por padrão o controller home / Index, caso não digite nada no navegador.
             });
         }
     }

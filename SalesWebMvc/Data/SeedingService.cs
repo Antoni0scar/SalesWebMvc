@@ -9,12 +9,12 @@ namespace SalesWebMvc.Data
 {
     public class SeedingService
     {
-        private SalesWebMvcContext _context;
+        private SalesWebMvcContext _context; //declarando a dependência com o DBContext
 
         public SeedingService(SalesWebMvcContext context)
         {
             _context = context;
-        }
+        } //fazendo a injeção de dependência, quando um seeding service for criado, ele vai receber uma instância do context também.
 
         public void Seed()
         {
